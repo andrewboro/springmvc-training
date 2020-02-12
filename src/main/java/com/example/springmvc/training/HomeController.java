@@ -1,18 +1,23 @@
 package com.example.springmvc.training;
 
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
 public class HomeController {
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    }
 
     @RequestMapping("/")
     public String showMyPage() {
@@ -50,7 +55,7 @@ public class HomeController {
         return "sign-up-form";
     }
 
-    @RequestMapping(value="/processSignUpForm", method= RequestMethod.POST)
+    @RequestMapping(value = "/processSignUpForm", method = RequestMethod.POST)
     public String processSignUpForm(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
         return bindingResult.hasErrors() ? "sign-up-form" : "confirm-sign-up";
     }
