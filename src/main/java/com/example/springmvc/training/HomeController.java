@@ -3,7 +3,9 @@ package com.example.springmvc.training;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,4 +41,16 @@ public class HomeController {
         model.addAttribute("message", sb.toString());
         return "confirm-hello-message";
     }
+
+    @GetMapping("/showSignUpForm")
+    public String showSignUpForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "sign-up-form";
+    }
+
+    @RequestMapping(value="/processSignUpForm", method= RequestMethod.POST)
+    public String processSignUpForm(@ModelAttribute Student student) {
+        return "confirm-sign-up";
+    }
+
 }
