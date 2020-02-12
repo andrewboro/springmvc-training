@@ -9,6 +9,15 @@ public class Student {
     @Size(min=1, message="Can not be empty.")
     private String lastName;
 
+    public Student() {
+
+    }
+
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
