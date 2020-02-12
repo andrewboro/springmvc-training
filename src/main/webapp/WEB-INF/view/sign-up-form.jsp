@@ -11,7 +11,9 @@
 
     <form:form action="processSignUpForm" modelAttribute="student">
         First Name: <form:input path="firstName"/><br><br>
-        Last Name: <form:input path="lastName"/><br><br>
+        Last Name: <form:input path="lastName"/>
+        <form:errors path="lastName" cssClass="error"/>
+        <br><br>
         <input type="submit" value="Sign Up"/>
     </form:form>
 </section>

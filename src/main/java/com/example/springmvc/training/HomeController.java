@@ -2,12 +2,14 @@ package com.example.springmvc.training;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -49,8 +51,8 @@ public class HomeController {
     }
 
     @RequestMapping(value="/processSignUpForm", method= RequestMethod.POST)
-    public String processSignUpForm(@ModelAttribute Student student) {
-        return "confirm-sign-up";
+    public String processSignUpForm(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
+        return bindingResult.hasErrors() ? "sign-up-form" : "confirm-sign-up";
     }
 
 }
