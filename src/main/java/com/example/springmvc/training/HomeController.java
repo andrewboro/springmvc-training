@@ -10,4 +10,14 @@ public class HomeController {
     public String showMyPage() {
         return "main-menu";
     }
+
+    @RequestMapping("/showHelloNameForm")
+    public String showHelloNameForm() {
+        return "hello-name-form";
+    }
+
+    @RequestMapping("/processHelloNameForm")
+    public String processHelloNameForm() {
+        return "confirm-hello-name";
+    }
 }
